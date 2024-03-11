@@ -45,7 +45,7 @@ export const Login = props => {
           <Text style={styles.orText}>or</Text>
           <Text
             style={styles.signUpText}
-            onPress={() => navigation.navigate('SignUp')}>
+            onPress={() => props.navigation.navigate('SignUp')}>
             Sign Up
           </Text>
         </View>
