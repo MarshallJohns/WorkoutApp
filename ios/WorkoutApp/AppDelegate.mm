@@ -13,7 +13,12 @@
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
-
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  // Add me --- \/
+  [FIRApp configure];
+  // Add me --- /\
+  // ...
+}
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
   return [self getBundleURL];

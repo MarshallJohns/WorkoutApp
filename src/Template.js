@@ -11,6 +11,17 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 //Images
 //Data
 //Styles
+import {
+  Buttons,
+  Colors,
+  Containers,
+  Fonts,
+  Icons,
+  Images,
+  Index,
+  Misc,
+  Window,
+} from '../../Styles/Index';
 
 export const Template = () => {
   return (
