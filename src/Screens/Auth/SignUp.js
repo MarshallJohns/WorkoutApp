@@ -29,7 +29,7 @@ import {
   Misc,
   Window,
 } from '../../Styles/Index';
-export const SignUp = () => {
+export const SignUp = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -59,6 +59,16 @@ export const SignUp = () => {
           defaultValue={email}
           autoCapitalize="none"
           keyBoardType="email-address"
+        />
+      </View>
+      <View style={styles.inputLabelView}>
+        <Text style={styles.inputLabelText}>Password</Text>
+        <TextInput
+          style={styles.textInput}
+          autoCapitalize="none"
+          onChangeText={text => setPassword(text)}
+          defaultValue={password}
+          secureTextEntry={true}
         />
       </View>
       <View style={styles.registerBtnContainer}>
