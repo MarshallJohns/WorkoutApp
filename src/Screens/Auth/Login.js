@@ -34,7 +34,7 @@ export const Login = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  console.log(email, password);
+
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={styles.scrollView}>
@@ -42,12 +42,6 @@ export const Login = props => {
           <View style={styles.titleBtnStyle}>
             <Text style={styles.loginText}>Log In</Text>
           </View>
-          <Text style={styles.orText}>or</Text>
-          <Text
-            style={styles.signUpText}
-            onPress={() => props.navigation.navigate('SignUp')}>
-            Sign Up
-          </Text>
         </View>
 
         <View style={styles.inputLabelView}>
@@ -73,14 +67,19 @@ export const Login = props => {
         {error.length > 0 ? (
           <Text style={styles.errorMessage}>{error}</Text>
         ) : null}
-        <TouchableOpacity onPress={() => setView('passwordReset')}>
+        <View style={styles.signUpContainer}>
+          <Text style={styles.signUpText}>Not a member? </Text>
+          <Text
+            style={styles.joinNowText}
+            onPress={() => props.navigation.navigate('SignUp')}>
+            Join here!
+          </Text>
+        </View>
+        {/* //!LEAVING THIS COMMENTED OUT SO I CAN CAN COME BACK TO IT */}
+        {/* <TouchableOpacity onPress={() => setView('passwordReset')}>
           <Text style={styles.forgotText}>Forgot your password?</Text>
-        </TouchableOpacity>
-        <View style={styles.loginBtnContainer}>
-          {/* <TouchableOpacity style={styles.fbBtn}>
-          <Icon name='facebook' size={fb.height} color={Colors.white} />
-          <Text style={styles.fbText}>LOGIN WITH FACEBOOK</Text>
         </TouchableOpacity> */}
+        <View style={styles.loginBtnContainer}>
           <TouchableOpacity
             style={styles.loginBtn}
             onPress={() => handleLogin()}>
@@ -112,6 +111,7 @@ const styles = StyleSheet.create({
   },
   titleTextContainer: {
     ...Containers.titleText,
+    ...Containers.centered,
   },
   logo: {
     ...Icons.logo,
@@ -123,10 +123,14 @@ const styles = StyleSheet.create({
   loginText: {
     ...Fonts.login,
   },
-  orText: {
-    ...Fonts.or,
+  signUpContainer: {
+    ...Containers.row,
+    alignItems: 'center',
   },
   signUpText: {
+    ...Fonts.h3,
+  },
+  joinNowText: {
     ...Fonts.signUp,
   },
   inputsContainer: {

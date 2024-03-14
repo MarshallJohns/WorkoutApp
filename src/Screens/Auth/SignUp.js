@@ -7,8 +7,10 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 //Packages
+import auth from '@react-native-firebase/auth';
 //Context
 //Constants
 //Navigation
@@ -31,21 +33,55 @@ import {
 } from '../../Styles/Index';
 export const SignUp = props => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [user, setUser] = useState(null);
   const [error, setError] = useState('');
+  console.log(user);
+  const onAuthStateChanged = user => {
+    setUser(user);
+    // if (initializing) setInitializing(false);
+  };
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+  const handleSignup = () => {
+    if (email.length > 0 && password.length > 0 && confirmPassword.length > 0) {
+      if (password === confirmPassword) {
+        auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            console.log('after');
+            setError('User account created & signed in!');
+          })
+          .catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+              setError('That email address is already in use!');
+            }
+
+            if (error.code === 'auth/invalid-email') {
+              setError('That email address is invalid!');
+            }
+
+            setError(error);
+          });
+      } else {
+        Alert.alert('Please make sure both password fields match.');
+      }
+    } else {
+      Alert.alert('Please Fill out all fields.');
+    }
+  };
   return (
     <ScrollView
       style={styles.scrollViewParent}
       contentContainerStyle={styles.scrollView}>
+      <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+        <Text style={styles.backButton}>Back</Text>
+      </TouchableOpacity>
       <View style={styles.titleTextContainer}>
-        <View style={styles.titleBtnStyle}>
-          <Text
-            onPress={() => props.navigation.navigate('Login')}
-            style={styles.loginText}>
-            Log In
-          </Text>
-        </View>
-        <Text style={styles.orText}>or</Text>
         <View style={styles.signUp}>
           <Text style={styles.signUpText}>Sign Up</Text>
         </View>
@@ -71,12 +107,21 @@ export const SignUp = props => {
           secureTextEntry={true}
         />
       </View>
+      <View style={styles.inputLabelView}>
+        <Text style={styles.inputLabelText}>Confirm Password</Text>
+        <TextInput
+          style={styles.textInput}
+          autoCapitalize="none"
+          onChangeText={text => setConfirmPassword(text)}
+          defaultValue={confirmPassword}
+          secureTextEntry={true}
+        />
+      </View>
+      {error.length > 0 ? (
+        <Text style={styles.errorMessage}>{error}</Text>
+      ) : null}
       <View style={styles.registerBtnContainer}>
-        <TouchableOpacity
-          onPress={e => {
-            handleEmail();
-          }}
-          style={styles.registerBtn}>
+        <TouchableOpacity onPress={handleSignup} style={styles.registerBtn}>
           <Text style={{textAlign: 'center', fontSize: 18}}>Register</Text>
         </TouchableOpacity>
       </View>
@@ -102,6 +147,7 @@ const styles = StyleSheet.create({
 
   titleTextContainer: {
     ...Containers.titleText,
+    ...Containers.centered,
   },
   logo: {
     ...Icons.logo,
@@ -152,5 +198,8 @@ const styles = StyleSheet.create({
   },
   error: {
     color: Colors.errorRed,
+  },
+  backButton: {
+    ...Fonts.h2,
   },
 });
