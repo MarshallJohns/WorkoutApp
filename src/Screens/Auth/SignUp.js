@@ -33,23 +33,25 @@ import {
 } from '../../Styles/Index';
 export const SignUp = props => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
-  console.log(user);
   const onAuthStateChanged = user => {
+    console.log(user);
     setUser(user);
-    // if (initializing) setInitializing(false);
+    if (initializing) setInitializing(false);
   };
-
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
+
   const handleSignup = () => {
     if (email.length > 0 && password.length > 0 && confirmPassword.length > 0) {
       if (password === confirmPassword) {
+        console.log(email, password);
         auth()
           .createUserWithEmailAndPassword(email, password)
           .then(() => {
@@ -73,6 +75,11 @@ export const SignUp = props => {
     } else {
       Alert.alert('Please Fill out all fields.');
     }
+  };
+  const handleSignOut = () => {
+    auth()
+      .signOut()
+      .then(() => console.log('User signed out!'));
   };
   return (
     <ScrollView
@@ -123,6 +130,11 @@ export const SignUp = props => {
       <View style={styles.registerBtnContainer}>
         <TouchableOpacity onPress={handleSignup} style={styles.registerBtn}>
           <Text style={{textAlign: 'center', fontSize: 18}}>Register</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.registerBtnContainer}>
+        <TouchableOpacity onPress={handleSignOut} style={styles.registerBtn}>
+          <Text style={{textAlign: 'center', fontSize: 18}}>signout</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

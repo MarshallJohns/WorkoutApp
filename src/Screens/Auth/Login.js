@@ -8,8 +8,10 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 //Packages
+// import auth from '@react-native-firebase/auth';
 //Context
 //Constants
 //Navigation
@@ -35,6 +37,30 @@ export const Login = props => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  // const handleLogin = () => {
+  //   if (email.length > 0 && password.length > 0 && confirmPassword.length > 0) {
+  //     console.log(email, password);
+  //     auth()
+  //       .signInWithEmailAndPassword(email, password)
+  //       .then(() => {
+  //         console.log('after');
+  //         setError('User account created & signed in!');
+  //       })
+  //       .catch(error => {
+  //         if (error.code === 'auth/email-already-in-use') {
+  //           setError('That email address is already in use!');
+  //         }
+
+  //         if (error.code === 'auth/invalid-email') {
+  //           setError('That email address is invalid!');
+  //         }
+
+  //         setError(error);
+  //       });
+  //   } else {
+  //     Alert.alert('Please Fill out all fields.');
+  //   }
+  // };
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={styles.scrollView}>

@@ -15,6 +15,7 @@
 		81141737BFBBC8DC7B454327 /* Pods_WorkoutApp_WorkoutAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD51087DCBDA51568F7A259F /* Pods_WorkoutApp_WorkoutAppTests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8720B9E22B9E454A006E7F2C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8720B9E12B9E454A006E7F2C /* GoogleService-Info.plist */; };
+		879E61D82BA3AD0800F10829 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 879E61D72BA3AD0800F10829 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12BE66F62CABA5401DC86DA8 /* Pods_WorkoutApp.framework in Frameworks */,
+				879E61D82BA3AD0800F10829 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +195,9 @@
 			dependencies = (
 			);
 			name = WorkoutApp;
+			packageProductDependencies = (
+				879E61D72BA3AD0800F10829 /* FirebaseAuth */,
+			);
 			productName = WorkoutApp;
 			productReference = 13B07F961A680F5B00A75B9A /* WorkoutApp.app */;
 			productType = "com.apple.product-type.application";
@@ -753,6 +758,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		879E61D72BA3AD0800F10829 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8720B9E32B9E4AEC006E7F2C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
