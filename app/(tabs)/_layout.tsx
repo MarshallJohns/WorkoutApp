@@ -11,7 +11,7 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="(home)"
+        name="index"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
@@ -20,11 +20,11 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="(settings)"
+        name="settings"
         options={{
-          title: "settings",
+          title: "Settings",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="calendar" size={28} color={color} />
+            <Ionicons name="settings" size={28} color={color} />
           ),
         }}
       />

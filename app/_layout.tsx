@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   return (
@@ -13,7 +14,6 @@ export default function RootLayout() {
         },
       }}
     >
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
   );
