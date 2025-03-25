@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 
 const SignUpScreen = () => {
@@ -16,26 +17,28 @@ const SignUpScreen = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.username}>Login</Text>
-      <TextInput
-        style={styles.input}
-        defaultValue={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <View style={styles.inputContainer}>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <Text style={styles.username}>Login</Text>
         <TextInput
           style={styles.input}
-          defaultValue={password}
-          onChangeText={(text) => setPassword(text)}
+          defaultValue={email}
+          onChangeText={(text) => setEmail(text)}
         />
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            defaultValue={password}
+            onChangeText={(text) => setPassword(text)}
+          />
+        </View>
+        <View style={styles.registerContainer}>
+          <TouchableOpacity onPress={() => router.push("/sign-up")}>
+            <Text style={styles.createAccount}> Create Account</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.registerContainer}>
-        <TouchableOpacity onPress={() => router.push("/sign-up")}>
-          <Text style={styles.createAccount}> Create Account</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -44,8 +47,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     // justifyContent: "center",
-    paddingTop: 60,
+    // paddingTop: 60,
     height: "100%",
+    borderColor: "black",
   },
   inputContainer: {
     width: "80%",
@@ -54,6 +58,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginTop: 10,
+    color: "pink",
   },
   location: {
     fontSize: 18,
