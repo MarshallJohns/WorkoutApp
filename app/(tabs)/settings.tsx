@@ -1,12 +1,19 @@
 import { StyleSheet, View, Text } from "react-native";
+import SubmitButton from "@/components/Reusables/SubmitButton";
 
 export default function SettingsScreen() {
+  const handleSignOut = async () => {};
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.text}>Settings</Text>
       </View>
       <Text style={styles.text}>SETTINGS</Text>
+      <SubmitButton
+        label={"Sign ouut"}
+        onPress={handleSubmit}
+        disabled={loading}
+      />
     </View>
   );
 }
