@@ -1,8 +1,23 @@
 import { StyleSheet, View, Text } from "react-native";
+import { auth } from "@/firebase.Config";
+import { signOut } from "firebase/auth";
+import { useRouter } from "expo-router";
+
 import SubmitButton from "@/components/Reusables/SubmitButton";
 
 export default function SettingsScreen() {
-  const handleSignOut = async () => {};
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      console.log("Signed out successfully");
+      router.replace("(auth)");
+      // You can also navigate to login screen here if using React Navigation
+    } catch (error) {
+      console.error("Sign out error:", error);
+    }
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -10,9 +25,9 @@ export default function SettingsScreen() {
       </View>
       <Text style={styles.text}>SETTINGS</Text>
       <SubmitButton
-        label={"Sign ouut"}
-        onPress={handleSubmit}
-        disabled={loading}
+        label={"Sign out"}
+        onPress={handleSignOut}
+        // disabled={loading}
       />
     </View>
   );
